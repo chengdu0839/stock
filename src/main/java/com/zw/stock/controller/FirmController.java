@@ -19,6 +19,7 @@ import com.zw.stock.service.FirmService;
 import com.zw.stock.vo.FirmVO;
 
 @Controller
+@RequestMapping("firm")
 public class FirmController {
 
 	@Autowired  
@@ -30,7 +31,7 @@ public class FirmController {
 	@Autowired
 	private HistoryDetailRepository historyDetailRepository;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	//@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView helloWorld(ModelMap model) {
 		List<Firm> users = firmRepository.findAll();
 		ModelAndView modelAndView = new ModelAndView("index1");
@@ -81,9 +82,9 @@ public class FirmController {
 	 * @param firmVO
 	 * @return
 	 */
-	@RequestMapping(value = "/crawlFirmByCode", method = RequestMethod.POST)
-	public @ResponseBody List<Firm> crawlFirmByCode(@RequestBody FirmVO firmVO) {
-		List<Firm> firmList = firmService.crawlFirmByCode(firmVO);
+	@RequestMapping(value = "/crawl", method = RequestMethod.GET)
+	public List<Firm> crawlFirmByCode() {
+		List<Firm> firmList = firmService.crawlFirmByCode(null);
 		return firmList;
 	}
 }
